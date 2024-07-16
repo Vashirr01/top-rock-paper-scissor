@@ -33,6 +33,9 @@ choices.forEach(choice => {
 
 function gameRound(userChoice, randomChoice) {
 
+    if(userpPoints === 3 || comPoints === 3) {
+       document.querySelector("#results").insertAdjacentHTML("beforeBegin", `<h2>${ userpPoints > comPoints? "You Win" : "You Lose"}</h2>`)
+    }
     const choice = userChoice.toLowerCase()
     const compChoice  = randomChoice()
 
@@ -68,11 +71,9 @@ function gameRound(userChoice, randomChoice) {
         }
         roundsPlayed++  
     }
-    else{
-        userResults.insertAdjacentHTML("afterstart", "<h2>Please enter a valid choice(either rock, paper or scissor)</h2>")
-    }
-    document.querySelector("#userChoice").textContent = choice
-    document.querySelector("#computerChoice").textContent = compChoice
+    
+    document.querySelector("#userChoice").textContent = "You : "+choice
+    document.querySelector("#computerChoice").textContent = "Computer : " +compChoice
 
     userResults.textContent = userpPoints;
     computerResults.textContent = comPoints;
