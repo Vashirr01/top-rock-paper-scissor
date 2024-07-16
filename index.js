@@ -18,10 +18,8 @@ let userpPoints = 0
 let comPoints = 0
 let roundsPlayed = 0
 
-const userChoice = () => {
-    const promptChoice = prompt("please enter your choice");
-    return promptChoice 
-}
+const choices = document.querySelectorAll("#choices")
+console.log(choices);
 
 function gameRound(userChoice, randomChoice) {
 
@@ -69,16 +67,6 @@ function gameRound(userChoice, randomChoice) {
         Computer: ${comPoints}`)
 }
 
-function fiveRounds() {
-    if(roundsPlayed < 5) {
-        gameRound(userChoice, randomChoice)
-        fiveRounds()
-    }
-    if(comPoints === userpPoints){
-        console.log("it's a tie")
-    }
-        console.log(userpPoints > comPoints ? "You Win" : "You lose")
-    
-}
+
 
 fiveRounds()
