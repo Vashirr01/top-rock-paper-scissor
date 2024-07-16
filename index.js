@@ -18,12 +18,22 @@ let userpPoints = 0
 let comPoints = 0
 let roundsPlayed = 0
 
-const choices = document.querySelectorAll("#choices")
+const choices = document.querySelectorAll("#choices button")
+const userResults = document.querySelector("#userpoints");
+const computerResults = document.querySelector("#compoints");
+
 console.log(choices);
+choices.forEach(choice => {
+    console.log(choice)
+    choice.addEventListener("click", event => {
+        gameRound(event.currentTarget.value, randomChoice)
+    })
+})
+
 
 function gameRound(userChoice, randomChoice) {
 
-    const choice = userChoice().toLowerCase()
+    const choice = userChoice.toLowerCase()
     const compChoice  = randomChoice()
 
     if(choice === compChoice) {
@@ -59,14 +69,14 @@ function gameRound(userChoice, randomChoice) {
         roundsPlayed++  
     }
     else{
-        console.log("please enter either rock, paper or scissor")
+        userResults.insertAdjacentHTML("afterstart", "<h2>Please enter a valid choice(either rock, paper or scissor)</h2>")
     }
+    document.querySelector("#userChoice").textContent = choice
+    document.querySelector("#computerChoice").textContent = compChoice
 
-    console.log(` ${choice}             ${compChoice}
-        You: ${userpPoints}
-        Computer: ${comPoints}`)
+    userResults.textContent = userpPoints;
+    computerResults.textContent = comPoints;
 }
 
 
 
-fiveRounds()
