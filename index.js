@@ -21,13 +21,18 @@ let roundsPlayed = 0
 const choices = document.querySelectorAll("#choices button")
 const userResults = document.querySelector("#userpoints");
 const computerResults = document.querySelector("#compoints");
+document.querySelector("#new-game").addEventListener("click", event => {
+    location.reload()
+})
+
+const eventFn = event => {
+    gameRound(event.currentTarget.value, randomChoice)
+}
 
 console.log(choices);
 choices.forEach(choice => {
     console.log(choice)
-    choice.addEventListener("click", event => {
-        gameRound(event.currentTarget.value, randomChoice)
-    })
+    choice.addEventListener("click", eventFn)
 })
 
 
@@ -35,6 +40,9 @@ function gameRound(userChoice, randomChoice) {
 
     if(userpPoints === 3 || comPoints === 3) {
        document.querySelector("#results").insertAdjacentHTML("beforeBegin", `<h2>${ userpPoints > comPoints? "You Win" : "You Lose"}</h2>`)
+       choices.forEach(choice => {
+        choice.removeEventListener("click", eventFn);
+       })
     }
     const choice = userChoice.toLowerCase()
     const compChoice  = randomChoice()
